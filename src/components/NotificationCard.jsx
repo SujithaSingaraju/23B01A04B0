@@ -5,15 +5,15 @@ export function NotificationCard({ notification }) {
     <Card>
       <CardContent>
         <Typography variant="h6">
-          {notification.title}
+          {notification.Type}
         </Typography>
 
-        <Typography variant="body2">
-          {notification.message}
+        <Typography variant="body1">
+          {notification.Message}
         </Typography>
 
         <Typography variant="caption">
-          {notification.type}
+          {notification.Timestamp}
         </Typography>
       </CardContent>
     </Card>

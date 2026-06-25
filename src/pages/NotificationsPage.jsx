@@ -10,6 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import { NotificationCard } from "../components/NotificationCard";
@@ -20,16 +21,19 @@ export function NotificationsPage() {
   const [filter, setFilter] = useState("All");
   const [page, setPage] = useState(1);
 
-  const { notifications, totalPages, loading, error } = useNotifications();
+  const { notifications, totalPages, loading, error } =
+    useNotifications();
 
   const unreadCount = 2;
 
   const filteredNotifications =
-    filter === "All"
-      ? notifications
-      : notifications.filter(
-          (n) => n.type.toLowerCase() === filter.toLowerCase()
-        );
+  filter === "All"
+    ? notifications
+    : notifications.filter(
+        (n) =>
+          n.Type.toLowerCase() ===
+          filter.toLowerCase()
+      );
 
   const handleFilterChange = (_, newFilter) => {
     if (newFilter) {
@@ -43,13 +47,32 @@ export function NotificationsPage() {
   };
 
   return (
-    <Box sx={{ maxWidth: 720, mx: "auto", px: 2, py: 4 }}>
-      <Stack direction="row" alignItems="center" spacing={1.5} mb={3}>
-        <Badge badgeContent={unreadCount} color="primary" max={99}>
+    <Box
+      sx={{
+        maxWidth: 900,
+        mx: "auto",
+        px: 2,
+        py: 4,
+      }}
+    >
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={1.5}
+        mb={3}
+      >
+        <Badge
+          badgeContent={unreadCount}
+          color="primary"
+          max={99}
+        >
           <NotificationsIcon sx={{ fontSize: 28 }} />
         </Badge>
 
-        <Typography variant="h5" fontWeight={700}>
+        <Typography
+          variant="h4"
+          fontWeight={700}
+        >
           Notifications
         </Typography>
       </Stack>
@@ -64,7 +87,11 @@ export function NotificationsPage() {
       </Box>
 
       {loading && (
-        <Box display="flex" justifyContent="center" py={6}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          py={6}
+        >
           <CircularProgress />
         </Box>
       )}
@@ -75,23 +102,33 @@ export function NotificationsPage() {
         </Alert>
       )}
 
-      {!loading && !error && filteredNotifications.length === 0 && (
-        <Alert severity="info">No notifications found</Alert>
-      )}
+      {!loading &&
+        !error &&
+        filteredNotifications.length === 0 && (
+          <Alert severity="info">
+            No notifications found
+          </Alert>
+        )}
 
-      {!loading && !error && filteredNotifications.length > 0 && (
-        <Stack spacing={1.5}>
-          {filteredNotifications.map((n) => (
-            <NotificationCard
-              key={n.id}
-              notification={n}
-            />
-          ))}
-        </Stack>
-      )}
+      {!loading &&
+        !error &&
+        filteredNotifications.length > 0 && (
+          <Stack spacing={2}>
+            {filteredNotifications.map((notification) => (
+              <NotificationCard
+                key={notification.ID}
+                notification={notification}
+              />
+            ))}
+          </Stack>
+        )}
 
       {!loading && totalPages > 1 && (
-        <Box display="flex" justifyContent="center" mt={4}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          mt={4}
+        >
           <Pagination
             count={totalPages}
             page={page}

@@ -18,23 +18,23 @@ export function useNotifications() {
         setNotifications(data.notifications ?? []);
         setTotal(data.total ?? 0);
 
-        await Log(
-          "frontend",
-          "info",
-          "hook",
-          "Notifications loaded successfully"
-        );
+        // await Log(
+        //   "frontend",
+        //   "info",
+        //   "hook",
+        //   "Notifications loaded successfully"
+        // );
 
         setError(null);
       } catch (err) {
         setError(err.message || "Something went wrong");
 
-        await Log(
-          "frontend",
-          "error",
-          "hook",
-          "Failed to load notifications"
-        );
+        // await Log(
+        //   "frontend",
+        //   "error",
+        //   "hook",
+        //   "Failed to load notifications"
+        // );
       } finally {
         setLoading(false);
       }
