@@ -1,0 +1,38 @@
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Log } from "../utils/logger";
+const filters = ["All", "Placement", "Result", "Event"];
+
+export function NotificationFilter({ value, onChange }) {
+  const handleChange = async (event, newValue) => {
+    onChange(event, newValue);
+
+    if (newValue) {
+      await Log(
+        "frontend",
+        "info",
+        "component",
+        `Filter changed to ${newValue}`
+      );
+    }
+  };
+
+  return (
+    <ToggleButtonGroup
+      value={value}
+      exclusive
+      onChange={handleChange}
+      size="small"
+      sx={{ flexWrap: "wrap", gap: 0.5 }}
+    >
+      {filters.map((type) => (
+        <ToggleButton
+          key={type}
+          value={type}
+          sx={{ textTransform: "none", px: 2 }}
+        >
+          {type}
+        </ToggleButton>
+      ))}
+    </ToggleButtonGroup>
+  );
+}
